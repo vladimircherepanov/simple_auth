@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
+require('dotenv').config()
+
 
 var corsOptions = {
     origin: "http://localhost:8081"
@@ -16,10 +18,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // simple route
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to bezkoder application." });
-});
-
+//app.get("/", (req, res) => {
+    //res.json({ message: "Welcome" });
+//});
 
 /////////////////////////////////////
 const db = require("./models");
@@ -76,9 +77,11 @@ function initial() {
     });
 }
 ///////////////////////////
-// routes
+// Routes
 require('./routes/auth.routes')(app)
 require('./routes/user.routes')(app)
+require('./routes/test.routes')(app)
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
