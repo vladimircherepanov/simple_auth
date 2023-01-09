@@ -4,7 +4,7 @@ const User = db.user;
 
 checkDuplicateUsernameOrEmail = (req, res, next) => {
     // Username
-    User.findOne({
+    /*User.findOne({
         username: req.body.username
     }).exec((err, user) => {
         if (err) {
@@ -16,7 +16,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
             res.status(400).send({ message: "Failed! Username is already in use!" });
             return;
         }
-
+*/
         // Email
         User.findOne({
             email: req.body.email
@@ -33,7 +33,7 @@ checkDuplicateUsernameOrEmail = (req, res, next) => {
 
             next();
         });
-    });
+
 };
 
 checkRolesExisted = (req, res, next) => {

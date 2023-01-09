@@ -35,3 +35,27 @@ exports.findOne = (req, res) => {
                 .send({ message: "Error retrieving User with id=" + id });
         });
 };
+
+exports.update = (req, res) => {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Data to update can not be empty!"
+        });
+    }
+
+    const id = req.params.id;
+
+    User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+        .then(data => {
+            if (!data) {
+                res.status(404).send({
+                    message: `Cannot update User with id=${id}. Maybe User was not found!`
+                });
+            } else res.send({ message: "User was updated successfully." });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating User with id=" + id
+            });
+        });
+}
